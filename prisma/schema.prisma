@@ -1,0 +1,135 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User{
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  email String @unique
+  hash String
+
+  firstName  String?
+  lastName String?
+
+    drugs Drug[]
+
+    @@map("users")
+}
+
+model Drug {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name String
+  price Int
+  category String
+  quantity Int
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+  @@map("drugs")
+}
+
+model Pharmacien {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+
+  email String @unique
+  hash String
+
+  firstName  String?
+  lastName String?
+}
+
+model Grossiste {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+
+  email String @unique
+  hash String
+  contact String @unique
+
+  firstName  String?
+  lastName String?
+}
+
+model Dpm {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+
+  email String @unique
+  hash String
+  contact String @unique
+
+  firstName  String?
+  lastName String?
+}
+
+model Pharmacie{
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+
+  email String @unique
+  hash String
+  contact String @unique
+  firstName  String?
+  lastName String?
+}
+
+model Sephire {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+
+  email String @unique
+  hash String
+  contact String @unique
+
+  firstName  String?
+  lastName String?
+}
+
+model Cnip {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+
+  email String @unique
+  hash String
+  contact String @unique
+
+  firstName  String?
+  lastName String?
+}
+
+model Spot {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+
+  email String @unique
+  hash String
+  contact String @unique
+  firstName  String?
+  lastName String?
+}
+
+model Cnopt {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+
+  email String @unique
+  hash String
+  contact String @unique
+
+  firstName  String?
+  lastName String?
+}
